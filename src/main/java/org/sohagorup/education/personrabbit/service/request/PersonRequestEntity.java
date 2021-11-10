@@ -1,41 +1,26 @@
-package org.sohagorup.education.personrabbit.domain;
+package org.sohagorup.education.personrabbit.service.request;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "person")
-public class PersonEntity {
+public class PersonRequestEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "first_name")
+    @JsonProperty("FirstName")
     private String firstName;
 
-    @Column(name = "last_name")
+    @JsonProperty("LastName")
     private String lastName;
 
-    @Column(name = "father_name")
+    @JsonProperty("FatherName")
     private String fatherName;
 
-    @Column(name = "national_code")
+    @JsonProperty("NationalCode")
     private String nationalCode;
 
-    @Column(name = "phone_number")
+    @JsonProperty("PhoneNumber")
     private String phoneNumber;
-
-    @Column(name = "gender")
-    private String gender;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -77,43 +62,31 @@ public class PersonEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PersonEntity)) return false;
-        PersonEntity that = (PersonEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(firstName, that.firstName) &&
+        if (!(o instanceof PersonRequestEntity)) return false;
+        PersonRequestEntity that = (PersonRequestEntity) o;
+        return Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(fatherName, that.fatherName) &&
                 Objects.equals(nationalCode, that.nationalCode) &&
-                Objects.equals(phoneNumber, that.phoneNumber) &&
-                Objects.equals(gender, that.gender);
+                Objects.equals(phoneNumber, that.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, fatherName, nationalCode, phoneNumber, gender);
+        return Objects.hash(firstName, lastName, fatherName, nationalCode, phoneNumber);
     }
 
     @Override
     public String toString() {
-        return "PersonEntity{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+        return "PersonRequestEntity{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", fatherName='" + fatherName + '\'' +
                 ", nationalCode='" + nationalCode + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", gender='" + gender + '\'' +
                 '}';
     }
 }
